@@ -1,5 +1,6 @@
+import { useState } from "react";
 import "./App.css";
-import DessertsList from "./DessertsList";
+/*import DessertsList from "./DessertsList";
 
 const desserts = [
   {
@@ -31,6 +32,48 @@ function App() {
       <DessertsList data = {desserts} />
     </div>
   );
+}
+
+export default App;
+ */
+import Todo from "./toDo.js";
+
+
+
+function App() {
+  const [todos, setTodo] = useState([
+    {
+      id: '001',
+      createAt: "20.38"
+    },
+    {
+      id: '002',
+      createAt: '19.37'
+    }
+  ]);
+
+  const reserveOrder = () => {
+    setTodo([...todos].reverse());
+  }
+
+  return (
+    <div>  
+        <button onClick={reserveOrder}>Reverse </button>
+  
+      <div>
+        <table>
+          <tbody>
+            {todos.map((todo, index) => (
+
+              <Todo key={todo.id} id={todo.id} createAt={todo.createAt} />
+              
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+
 }
 
 export default App;
