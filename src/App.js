@@ -176,7 +176,7 @@ export default App; */
 
 export default App; */
 
-//import { validateEmail } from "./utils";
+import { validateEmail } from "./utils";
 
 const PasswordErrorMessage = () => {
   return (
@@ -195,25 +195,39 @@ function App() {
   const [role, setRole] = useState("role");
 
   const getIsFormValid = () => {
-    // Implement this function
-    return true;
+    if (
+      firstName.length>0 &&
+      email.length> 0 &&
+      validateEmail(email) &&
+      password.value.length >= 8 &&
+      role != 'role') {
+        return true;
+      } else {
+        return false
+      }
+      
+    
+    
   };
 
   const clearForm = () => {
     // Implement this function
+
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword({
+      value: '',
+      isTouched: false
+    });
+    setRole('role');
   };
 
-  const handleSubmit = (e) => {
-
-    if (password.value.length > 8) {
-      PasswordErrorMessage();
-    } else {
-      alert("Account created!");
-      clearForm();
-      e.preventDefault();
-    }
-
+  const handleSubmit = () => {
+    alert("Account created!");
+    clearForm();
   };
+
 
   return (
     <div className="App">
