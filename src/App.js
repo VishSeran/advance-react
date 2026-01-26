@@ -36,9 +36,7 @@ function App() {
 
 export default App;
  */
-import Todo from "./toDo.js";
-
-
+/* import Todo from "./toDo.js";
 
 function App() {
   const [todos, setTodo] = useState([
@@ -52,25 +50,72 @@ function App() {
     }
   ]);
 
+  const [value, setValue] = useState("null");
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    
+  }
+
   const reserveOrder = () => {
     setTodo([...todos].reverse());
   }
 
   return (
-    <div>  
-        <button onClick={reserveOrder}>Reverse </button>
-  
+    <div>
+      <button onClick={reserveOrder}>Reverse </button>
+
       <div>
         <table>
           <tbody>
             {todos.map((todo, index) => (
 
               <Todo key={todo.id} id={todo.id} createAt={todo.createAt} />
-              
+
             ))}
           </tbody>
         </table>
       </div>
+
+      <div>
+        <form>
+          <input value={value} onChange={handleChange} type="text" />
+          
+        </form>
+      </div>
+    </div>
+  )
+
+}
+
+export default App; */
+
+function App() {
+
+  const [name, setName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setName("");
+    console.log('form submitted!');
+  }
+
+  return (
+    <div className="App">
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <div className="nameField">
+            <label> Name </label>
+            <input
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <button disabled={!name} type="submit"> Submit </button>
+        </fieldset>
+      </form>
     </div>
   )
 
