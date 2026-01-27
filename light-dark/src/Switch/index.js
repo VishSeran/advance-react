@@ -3,10 +3,10 @@ import { useTheme } from "../ThemeContext";
 import { useCallback } from "react";
 
 const Switch = () => {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   return (
     <label className="switch">
-      <input onChange = {useCallback}
+      <input onChange = {toggleTheme}
         type="checkbox"
         checked={theme === "light"}
       />
