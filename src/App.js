@@ -359,7 +359,7 @@ function App() {
 
 export default Root; */
 
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 
 function App() {
 
@@ -391,4 +391,85 @@ function App() {
     </div>
   )
 }
+export default App; */
+
+import React, { useState } from "react";
+
+function GoalForm(props) {
+
+  const [formData, setFormData] = useState({
+    goal: "",
+    by: ""
+  });
+
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onAdd(formData);
+    console.log(`goal: ${formData.goal} \nby: ${formData.by}`)
+    setFormData({ goal: "", by: "" });
+
+  }
+
+
+  return (
+    <div>
+      <h1>Goal form </h1>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="goal">Set your goal: </label>
+          <input name="goal" type="text" value={formData.goal} onChange={handleChange} />
+        </div>
+
+        <div>
+          <label htmlFor="by">Set your by: </label>
+          <input name="by" type="text" value={formData.by} onChange={handleChange} />
+        </div>
+
+        <button> Submit </button>
+      </form>
+
+    </div>
+
+
+  )
+}
+
+function ListofGoals (props){
+
+  return(
+    <ul>
+      {
+        props.goalArray.map((goal) => (
+          <li key={goal.goal}>
+            <span>My goal is to {goal.goal}, by {goal.by} </span>
+          </li>
+        ))
+      }
+    </ul>
+  );
+}
+
+function App() {
+
+  const [allGoals, updateAllGoals] = useState([]);
+
+  function addGoal(goal) {
+    updateAllGoals([...allGoals, goal]);
+  }
+
+  return (
+    <div>
+      <GoalForm onAdd={addGoal} />
+      <ListofGoals goalArray = {allGoals}/>
+      
+    </div>
+  )
+}
+
 export default App;
