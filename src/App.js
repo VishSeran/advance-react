@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import "./App.css";
 import { UserProvider, useUser } from "./userContext.js";
 /*import DessertsList from "./DessertsList";
@@ -486,7 +487,7 @@ function App() {
 
 export default App; */
 
-import react, { useEffect, useState } from "react";
+/* import react, { useEffect, useState } from "react";
 
 
 function App() {
@@ -514,4 +515,29 @@ function App() {
   );
 }
 
+export default App; */
+
+function App() {
+  const [user, setUser] = useState([]);
+
+  const fetchData = () => {
+    fetch("https://randomuser.me/api/?results=1")
+      .then(response => response.json())
+      .then(data => setUser(data));
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  return Object.keys(user).length > 0 ? (
+    <div>
+      <h1>Customer Data</h1>
+      <h2>Name: {user.results[0].name.first}</h2>
+      <img src={user.results[0].picture.medium} />
+    </div>
+  ) : (
+    <h1>Data Processing</h1>
+  )
+}
 export default App;
