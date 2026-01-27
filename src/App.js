@@ -393,7 +393,7 @@ function App() {
 }
 export default App; */
 
-import React, { useEffect, useState, version } from "react";
+/* import React, { useEffect, useState, version } from "react";
 
 function GoalForm(props) {
 
@@ -425,7 +425,7 @@ function GoalForm(props) {
 
   useEffect(() => {
      document.title =  toggle? "Submitted!" : "Goal Form"
-  },[])
+  },[toggle])
 
 
   return (
@@ -482,6 +482,36 @@ function App() {
 
     </div>
   )
+}
+
+export default App; */
+
+import react, { useEffect, useState } from "react";
+
+
+function App() {
+  const [user, setUser] = useState([]);
+
+  const fetchUser = () => {
+    fetch("https://randomuser.me/api/?results=1")
+      .then(response => response.json())
+      .then(data => setUser(data));
+  }
+
+  useEffect(() => {
+    fetchUser();
+  }, [])
+
+
+  return Object.keys(user).length > 0 ? (
+    <div>
+      <h1>Data Fetched</h1>
+      <h3>first name: {user.results[0].name.first}</h3>
+      <h3>last name: {user.results[0].name.last}</h3>
+    </div>
+  ) : (
+    <h1>Data processing</h1>
+  );
 }
 
 export default App;
