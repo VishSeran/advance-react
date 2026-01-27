@@ -295,7 +295,7 @@ function App() {
 export default App;
  */
 
-const LoggedUser = () => {
+/* const LoggedUser = () => {
 
   const {user} = useUser();
   return (
@@ -349,12 +349,46 @@ function App() {
     </div>
 
   )
-}
+} */
 
 
 
-function Root () {
+/* function Root () {
   return <UserProvider> <App /> </UserProvider>
 }
 
-export default Root;
+export default Root; */
+
+import React, { useState } from "react";
+
+function App() {
+
+  const [greeting, setGreeting] = useState({
+    greet: "Welcome to Heaven",
+    time: 7
+
+  });
+
+  const updateGreet = () => {
+    setGreeting((prevState) =>{
+      return {...prevState, greet:"let's begin"}
+    })
+  }
+
+  function increaseTime(){
+    setGreeting((prevState)=>{
+      return {...prevState, time: 50}
+    })
+  }
+
+
+
+  return (
+    <div>
+      <h1>hello user, {greeting.greet}. Your vacation is {greeting.time} years </h1>
+      <button onClick={updateGreet}>Change Greeting</button>
+      <button onClick={increaseTime}> Increase Time</button>
+    </div>
+  )
+}
+export default App;

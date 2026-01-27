@@ -51,6 +51,9 @@ const Header = () => {
 };
 
 const Page = () => {
+
+  let veggie = ['apple','orange', 'banana'];
+  const[v1,v2,v3] = veggie;
   return (
     <div className="Page">
       <Title>When it comes to dough</Title>
