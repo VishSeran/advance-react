@@ -517,7 +517,7 @@ function App() {
 
 export default App; */
 
-function App() {
+/* function App() {
   const [user, setUser] = useState([]);
 
   const fetchData = () => {
@@ -540,4 +540,58 @@ function App() {
     <h1>Data Processing</h1>
   )
 }
-export default App;
+export default App; */
+
+
+
+export default function App() {
+  const [giftCard, setGiftCard] = useState(
+    {
+        firstName: "Jennifer",
+        lastName: "Smith",
+        text: "Free dinner for 4 guests",
+        valid: true,
+        instructions: "To use your coupon, click the button below.",
+    }
+  );
+
+  function spendGiftCard() {
+    /* setGiftCard({
+      ...giftCard,
+      text: "Your coupon has been used.",
+      valid: false,
+      instructions: "Please visit our restaurant to renew your gift card."
+    }) */
+
+      setGiftCard((prevState) => {
+        return {...prevState, text:"Your coupon has been used.",
+          valid: false,
+          instructions: "Please visit our restaurant to renew your gift card."
+        }
+      })
+  }
+
+  return (
+    <div style={{padding: '40px'}}>
+      <h1>
+        Gift Card Page
+      </h1>
+      <h2>
+        Customer: {giftCard.firstName} {giftCard.lastName}
+      </h2>
+      <h3>
+        {giftCard.text}
+      </h3>
+      <p>
+        {giftCard.instructions}
+      </p>
+      {
+        giftCard.valid && (
+          <button onClick={spendGiftCard}>
+            Spend Gift Card
+          </button>
+        )
+      }
+    </div>
+  );
+}
