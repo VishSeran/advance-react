@@ -393,7 +393,7 @@ function App() {
 }
 export default App; */
 
-import React, { useState } from "react";
+import React, { useEffect, useState, version } from "react";
 
 function GoalForm(props) {
 
@@ -401,6 +401,10 @@ function GoalForm(props) {
     goal: "",
     by: ""
   });
+
+  const [toggle, setToggle] = useState(false);
+
+
 
 
   function handleChange(e) {
@@ -414,6 +418,14 @@ function GoalForm(props) {
     setFormData({ goal: "", by: "" });
 
   }
+
+  function submitHandler() {
+    setToggle(!toggle);
+  }
+
+  useEffect(() => {
+     document.title =  toggle? "Submitted!" : "Goal Form"
+  },[])
 
 
   return (
@@ -431,7 +443,7 @@ function GoalForm(props) {
           <input name="by" type="text" value={formData.by} onChange={handleChange} />
         </div>
 
-        <button> Submit </button>
+        <button onClick={submitHandler}> Submit </button>
       </form>
 
     </div>
@@ -440,9 +452,9 @@ function GoalForm(props) {
   )
 }
 
-function ListofGoals (props){
+function ListofGoals(props) {
 
-  return(
+  return (
     <ul>
       {
         props.goalArray.map((goal) => (
@@ -466,8 +478,8 @@ function App() {
   return (
     <div>
       <GoalForm onAdd={addGoal} />
-      <ListofGoals goalArray = {allGoals}/>
-      
+      <ListofGoals goalArray={allGoals} />
+
     </div>
   )
 }
