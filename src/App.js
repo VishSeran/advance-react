@@ -1,5 +1,6 @@
-import { useState } from "react";
+
 import "./App.css";
+import { UserProvider, useUser } from "./userContext.js";
 /*import DessertsList from "./DessertsList";
 
 const desserts = [
@@ -176,7 +177,7 @@ export default App; */
 
 export default App; */
 
-import { validateEmail } from "./utils";
+/* import { validateEmail } from "./utils";
 
 const PasswordErrorMessage = () => {
   return (
@@ -196,18 +197,18 @@ function App() {
 
   const getIsFormValid = () => {
     if (
-      firstName.length>0 &&
-      email.length> 0 &&
+      firstName.length > 0 &&
+      email.length > 0 &&
       validateEmail(email) &&
       password.value.length >= 8 &&
       role != 'role') {
-        return true;
-      } else {
-        return false
-      }
-      
-    
-    
+      return true;
+    } else {
+      return false
+    }
+
+
+
   };
 
   const clearForm = () => {
@@ -292,3 +293,68 @@ function App() {
 }
 
 export default App;
+ */
+
+const LoggedUser = () => {
+
+  const {user} = useUser();
+  return (
+    <p>
+      Hello <span className="user">{user.name}</span>
+    </p>
+  )
+
+}
+
+const Header = () => {
+  return (
+    <header>
+      <h1>The Daily Blog App </h1>
+    </header>
+
+  )
+}
+
+const Page = () => {
+
+  const {user} = useUser();
+  return (
+    <div>
+      <h2>The Private Issues in AI</h2>
+
+      <div>
+        <p>
+          Artificial Intelligence raises serious **privacy concerns** because it relies heavily on large volumes of personal data to function effectively. AI systems often collect, analyze, and store sensitive information such as biometric data, location history, online behavior, medical records, and personal communications. This creates risks of data misuse, unauthorized access, surveillance, and identity theft, especially when data is stored in centralized systems or handled by third-party services. Many users are unaware of how their data is collected or how long it is retained, leading to a lack of informed consent and transparency. When AI models are trained on personal data without proper anonymization, individuals can be re-identified, making privacy protection even more difficult.
+
+          Another major issue is **data ownership and control**, where individuals lose authority over their personal information once it is processed by AI systems. Companies and organizations may use personal data for purposes beyond the original intent, such as targeted advertising, behavioral prediction, or profiling, without clear user permission. This can lead to discrimination, manipulation, and digital exploitation, especially when AI systems infer sensitive attributes like political views, mental health conditions, or financial status. Without strong regulations, ethical standards, and technical safeguards like encryption and differential privacy, AI can become a tool for mass surveillance and social control rather than human empowerment. Protecting privacy in AI requires strong legal frameworks, transparent data practices, and privacy-by-design system architectures.
+
+        </p>
+      </div>
+
+      <div>
+        <h3>Authored by user {user.name}</h3>
+      </div>
+    </div>
+
+  )
+}
+
+function App() {
+  return (
+
+    <div>
+      <Header />
+      <LoggedUser />
+      <Page />
+    </div>
+
+  )
+}
+
+
+
+function Root () {
+  return <UserProvider> <App /> </UserProvider>
+}
+
+export default Root;
