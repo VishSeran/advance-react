@@ -1,8 +1,5 @@
 
-import { act, useEffect, useReducer, useRef, useState } from "react";
-import "./App.css";
-import { UserProvider, useUser } from "./userContext.js";
-import { type } from "@testing-library/user-event/dist/type/index.js";
+
 /*import DessertsList from "./DessertsList";
 
 const desserts = [
@@ -564,38 +561,38 @@ export default App; */
       instructions: "Please visit our restaurant to renew your gift card."
     }) */
 
-      /*
-      setGiftCard((prevState) => {
-        return {...prevState, text:"Your coupon has been used.",
-          valid: false,
-          instructions: "Please visit our restaurant to renew your gift card."
-        }
-      })
+/*
+setGiftCard((prevState) => {
+  return {...prevState, text:"Your coupon has been used.",
+    valid: false,
+    instructions: "Please visit our restaurant to renew your gift card."
   }
+})
+}
 
-  return (
-    <div style={{padding: '40px'}}>
-      <h1>
-        Gift Card Page
-      </h1>
-      <h2>
-        Customer: {giftCard.firstName} {giftCard.lastName}
-      </h2>
-      <h3>
-        {giftCard.text}
-      </h3>
-      <p>
-        {giftCard.instructions}
-      </p>
-      {
-        giftCard.valid && (
-          <button onClick={spendGiftCard}>
-            Spend Gift Card
-          </button>
-        )
-      }
-    </div>
-  );
+return (
+<div style={{padding: '40px'}}>
+<h1>
+  Gift Card Page
+</h1>
+<h2>
+  Customer: {giftCard.firstName} {giftCard.lastName}
+</h2>
+<h3>
+  {giftCard.text}
+</h3>
+<p>
+  {giftCard.instructions}
+</p>
+{
+  giftCard.valid && (
+    <button onClick={spendGiftCard}>
+      Spend Gift Card
+    </button>
+  )
+}
+</div>
+);
 } */
 
 //useReducer hook - when there have complex state logics with multiple sub-values or the next state
@@ -641,14 +638,14 @@ export default App;
 /*
 useState - Store data that affects what you see on the screen
 When state changes ➜ component re-renders
-*/ 
+*/
 
 //useRef- its accessign the Dom and Store data that does NOT need to re-render the UI
 //Accessing DOM elements
 
 
 
-function App(){
+/* function App(){
 
   const formInputRef = useRef(null)
   const focusInput = () => {
@@ -663,4 +660,50 @@ function App(){
     </div>
   )
 }
-export default App;
+export default App; */
+
+import { useState, useEffect, useRef } from "react";
+
+export default function App() {
+  const [day, setDay] = useState("Monday");
+  const prevDay = usePrevious(day);
+  const getNextDay = () => {
+    if (day === "Monday") {
+      setDay("Tuesday")
+    } else if (day === "Tuesday") {
+      setDay("Wednesday")
+    } else if (day === "Wednesday") {
+      setDay("Thursday")
+    } else if (day === "Thursday") {
+      setDay("Friday")
+    } else if (day === "Friday") {
+      setDay("Monday")
+    }
+  }
+  return (
+    <div style={{ padding: "40px" }}>
+      <h1>
+        Today is: {day}<br />
+        {
+          prevDay && (
+            <span>Previous work day was: {prevDay}</span>
+          )
+        }
+      </h1>
+      <button onClick={getNextDay}>
+        Get next day
+      </button>
+    </div>
+  );
+}
+function usePrevious(val) {
+  
+  const ref = useRef(null);
+
+  useEffect(()=>{
+    ref.current = val;
+  },[val])
+
+  return ref.current;
+
+}
