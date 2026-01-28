@@ -1,7 +1,8 @@
 
-import { useEffect, useState } from "react";
+import { act, useEffect, useReducer, useState } from "react";
 import "./App.css";
 import { UserProvider, useUser } from "./userContext.js";
+import { type } from "@testing-library/user-event/dist/type/index.js";
 /*import DessertsList from "./DessertsList";
 
 const desserts = [
@@ -544,7 +545,7 @@ export default App; */
 
 
 
-export default function App() {
+/* export default function App() {
   const [giftCard, setGiftCard] = useState(
     {
         firstName: "Jennifer",
@@ -563,6 +564,7 @@ export default function App() {
       instructions: "Please visit our restaurant to renew your gift card."
     }) */
 
+      /*
       setGiftCard((prevState) => {
         return {...prevState, text:"Your coupon has been used.",
           valid: false,
@@ -594,4 +596,43 @@ export default function App() {
       }
     </div>
   );
+} */
+
+//useReducer hook - when there have complex state logics with multiple sub-values or the next state
+//depend on the previous state we use useReducer to handle such situations
+
+/* useReducer like super powered useState.
+useState get initial state, but useReducer get a reducer function and an initial state
+ */
+
+
+const reducer = (state, action) => {
+  if(action.type === 'transport') return {money:state.money -45}
+  if(action.type === 'group') return { money: state.money + 120}
+  if (action.type === 'individual') return{money: state.money + 500}
 }
+
+function App () {
+
+  const initialState = {money: 100}
+  
+  //useReducer initiate
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return(
+    <div>
+      <h1>
+        Wallet Tracker
+      </h1>
+
+      <div>
+        wallet money: {state.money}
+      </div>
+
+      <button onClick={()=> dispatch({type:'transport'})}>Transport</button>
+      <button onClick={()=> dispatch({type:'group'})}>Group Class</button>
+      <button onClick={() => dispatch({type: 'individual'})}>Individual Class</button>
+    </div>
+  )
+}
+export default App;
