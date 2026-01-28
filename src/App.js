@@ -1,5 +1,5 @@
 
-import { act, useEffect, useReducer, useState } from "react";
+import { act, useEffect, useReducer, useRef, useState } from "react";
 import "./App.css";
 import { UserProvider, useUser } from "./userContext.js";
 import { type } from "@testing-library/user-event/dist/type/index.js";
@@ -606,7 +606,7 @@ useState get initial state, but useReducer get a reducer function and an initial
  */
 
 
-const reducer = (state, action) => {
+/* const reducer = (state, action) => {
   if(action.type === 'transport') return {money:state.money -45}
   if(action.type === 'group') return { money: state.money + 120}
   if (action.type === 'individual') return{money: state.money + 500}
@@ -632,6 +632,34 @@ function App () {
       <button onClick={()=> dispatch({type:'transport'})}>Transport</button>
       <button onClick={()=> dispatch({type:'group'})}>Group Class</button>
       <button onClick={() => dispatch({type: 'individual'})}>Individual Class</button>
+    </div>
+  )
+}
+export default App;
+ */
+
+/*
+useState - Store data that affects what you see on the screen
+When state changes ➜ component re-renders
+*/ 
+
+//useRef- its accessign the Dom and Store data that does NOT need to re-render the UI
+//Accessing DOM elements
+
+
+
+function App(){
+
+  const formInputRef = useRef(null)
+  const focusInput = () => {
+    formInputRef.current.focus();
+  }
+
+  return(
+    <div>
+      <h1>Using useRef hook to access to underlying DOM</h1>
+      <button onClick={focusInput}>Focus Input</button>
+      <input ref={formInputRef} type="text"/>
     </div>
   )
 }
