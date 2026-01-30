@@ -90,6 +90,8 @@ function App() {
 
 export default App; */
 
+import { Children } from "react";
+
 //exercise for controlled form with fieldset
 /* function App() {
 
@@ -662,7 +664,7 @@ When state changes ➜ component re-renders
 }
 export default App; */
 
-import { useState, useEffect, useRef } from "react";
+/* import { useState, useEffect, useRef } from "react";
 
 export default function App() {
   const [day, setDay] = useState("Monday");
@@ -707,3 +709,41 @@ function usePrevious(val) {
   return ref.current;
 
 }
+ */
+
+//component composition
+
+/* const Button = ({children, backgroundColor} ) => {
+  return <Button style={{backgroundColor}}>{Children}</Button>
+}
+
+const Alert =  ({children}) => {
+  return (
+    <>
+      <div className="overlay"/>
+      <div className="Alert">{children}</div>    
+    </>
+  );
+
+
+};
+
+const DeleteButton = () => {
+  return <button backgroundColor= 'red'> Delete </button>
+}
+
+function App (){
+  return(
+    <div>
+      <h1> Account Deletion</h1>
+      <Alert>
+        <h1>Are you sure</h1>
+        <p>This will permenate action</p>
+        <DeleteButton />
+      </Alert>
+
+    </div>
+  )
+}
+
+export default App; */
