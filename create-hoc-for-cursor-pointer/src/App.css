@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.paneldiv {
+  display: flex;
+  justify-content: center;
+}
+
+.panelSpan {
+  margin-left: 8px;
+}
