@@ -90,7 +90,7 @@ function App() {
 
 export default App; */
 
-import { Children } from "react";
+import React, { Children } from "react";
 
 //exercise for controlled form with fieldset
 /* function App() {
@@ -747,3 +747,40 @@ function App (){
 }
 
 export default App; */
+
+//React.cloneElement and React.children APIs
+
+const Row = ({children, spacing}) => {
+
+  const childStyle = {
+    marginLeft: `${spacing}px`
+  };
+
+  return (
+    <div style={{display:"flex", backgroundColor:"blue"}}>
+      {React.Children.map(children, (child,index) => {
+
+        return React.cloneElement(child,{
+          style: {
+            ...child.props.style,
+            ...(index>0 ? childStyle:{})
+          }
+        });   
+      })}
+      
+    </div>
+  )
+}
+
+export default function App () {
+  return(
+    <div>
+      <Row spacing={62}>
+        <p>pizza chicken</p>
+        <p>20 dollars</p>
+        <p>3 </p>
+        <p>60 dollars</p>
+      </Row>
+    </div>
+  )
+}
