@@ -1,0 +1,24 @@
+.App{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+    padding: 16px;
+}
+
+.submit{
+    height: 30px;
+    width: 100px;
+    margin-top: 16px;
+    border-radius: 10px;
+    background-color: darkblue;
+    border: none;
+    color: aliceblue;
+}
+
+button:disabled,
+button[disabled]{
+    background-color: antiquewhite;
+    color:black;
+}
+
