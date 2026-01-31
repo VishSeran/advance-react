@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import { RadioGroup, RadioOption } from './Radio';
+import { LoginButton, SignButton } from './Button';
 
 function App() {
 
@@ -17,6 +18,9 @@ function App() {
                 <RadioOption value="other">Other</RadioOption>
             </RadioGroup>
             <button className='submit' disabled={!selected}>Submit</button>
+
+            <LoginButton>Login</LoginButton>
+            <SignButton>Signin</SignButton>
         </div>
     )
 }
